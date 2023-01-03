@@ -10,5 +10,5 @@ def read_file(csv_file):
 
 if __name__ == "__main__":
 
-    chocolate_data = read_file("data/Chocolate bar ratings 2022.csv")
+    chocolate_data = read_file("data/Chocolate_bar_ratings_2022.csv")
     print(chocolate_data)

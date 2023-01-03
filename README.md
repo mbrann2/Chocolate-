@@ -87,3 +87,10 @@ The ratings are between 1 and 5 with 1 considered the lowest rating and 5 as the
 <br />
 <br />
 
+***
+## **Overall**
+***
+The dataset provides a multitude of factors pertaining to chocolate ratings around the world. After analyzing the data [Chocolate bar ratings 2022](data/Chocolate_bar_ratings_2022.csv), it was determined that a logical focus would be on the assessment of the [top ten](#top-10-countries-chocolate-ratings-count) countries containing the most chocolate ratings.
+<br />
+
+### Top 10 Countries: Chocolate Ratings Count
