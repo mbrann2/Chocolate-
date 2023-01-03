@@ -94,3 +94,12 @@ The dataset provides a multitude of factors pertaining to chocolate ratings arou
 <br />
 
 ### Top 10 Countries: Chocolate Ratings Count
+***
+After comparing the top ten countries, it was revealed that by far the United States contains the most chocloate ratings. 
+
+![](images/top_ten_bar_plot.png) <br />
+
+More specifically, the United States contains well more than half of the chocolate ratings out of the top ten countries.
+
+![](images/top_ten_pie_chart.png) <br />
+
