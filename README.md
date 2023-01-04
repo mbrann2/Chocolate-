@@ -103,3 +103,4 @@ More specifically, the United States contains well more than half of the chocola
 
 ![](images/top_ten_pie_chart.png) <br />
 
+### Cocoa Percentage and Rating Comparisons

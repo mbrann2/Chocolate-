@@ -53,7 +53,7 @@ def top_ten_count_chocolate_ratings(choco_df):
 ###
 
 # Plot a % breakdown of the top ten countires containing the most chocolate ratings.
-def top_ten_count_chocolate_ratings(choco_df):
+def top_ten_count_chocolate_ratings_percent(choco_df):
      company_location = choco_df["Company Location"].value_counts().sort_values(ascending=False)
      top_ten_countries = company_location[0:10]
 
@@ -78,10 +78,44 @@ def top_ten_count_chocolate_ratings(choco_df):
      
 ###
 
+# Bin data into 4 groups based on cocoa percent and rating.
+def cocoa_percent_and_rating(choco_df):
+    chocolate_data['Remove Cocoa Percentage'] = chocolate_data['Cocoa Percent'].astype(str).str.replace('%', '')
+    chocolate_data['Cocoa Percentage as Float'] = chocolate_data['Remove Cocoa Percentage'].astype('float') / 100.0
+    chocolate_data_high_both = choco_df[(choco_df['Cocoa Percentage as Float'] >= 0.70) & (choco_df['Rating'] >= 4.00)].shape[0]
+    chocolate_data_high_cocoa = choco_df[(choco_df['Cocoa Percentage as Float'] >= 0.70) & (choco_df['Rating'] < 4.00)].shape[0]
+    chocolate_data_mixed = choco_df[(choco_df['Cocoa Percentage as Float'] < 0.70) & (choco_df['Rating'] >= 4.00)].shape[0]
+    chocolate_data_low_both = choco_df[(choco_df['Cocoa Percentage as Float'] < 0.70) & (choco_df['Rating'] < 4.00)].shape[0]
+
+    # Bar plot of data.
+    fig, ax = plt.subplots(figsize = (10,6))
+    c = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']
+    cocoa_and_rating_comparison_sorted = dict(sorted(cocoa_and_rating_comparison.items(), key=lambda item: item[1]))
+    cocoa_bins = list(cocoa_and_rating_comparison_sorted.keys())
+    cocoa_bin_counts = list(cocoa_and_rating_comparison_sorted.values())
+
+    plt.bar(range(len(cocoa_and_rating_comparison_sorted)), cocoa_bin_counts, tick_label=cocoa_bins, align = 'center', color = c)
+
+    ax.set_title("Binned Chocolate Analysis")
+    ax.set_ylabel("Chocolate Counts by Bin")
+    ax.set_xlabel("Cocoa Percent & Rating Comparisons")
+    chocolate_data_mixed_legend = mpatches.Patch(color= 'blue', label='Chocolate Data Mixed: 16')
+    chocolate_data_high_both_legend = mpatches.Patch(color= 'orange', label='Chocolate Data High Both: 99')
+    chocolate_data_low_both_legend = mpatches.Patch(color= 'green', label='Chocolate Data Low Both: 381')
+    chocolate_data_high_cocoa_legend = mpatches.Patch(color= 'red', label='Chocolate Data High Cocoa.: 2,092')
+    plt.legend(handles=[chocolate_data_mixed_legend, chocolate_data_high_both_legend, chocolate_data_low_both_legend,chocolate_data_high_cocoa_legend])
+    fig.tight_layout()
+    plt.savefig("images/binned_cocoa_analysis.png")
+    return {"Chocolate Data High Both":chocolate_data_high_both, "Chocolate Data High Cocoa":chocolate_data_high_cocoa,"Chocolate Data Mixed":chocolate_data_mixed, "Chocolate Data Low Both":chocolate_data_low_both}
+
+# Respective functions listed below to test outputs to terminal and images directory.
+
 if __name__ == "__main__":
     
     chocolate_data = read_file("data/Chocolate_bar_ratings_2022.csv")
     
-    top_ten_chocolate_by_country = top_ten_count_chocolate_ratings(chocolate_data)
+    # top_ten_chocolate_by_country = top_ten_count_chocolate_ratings(chocolate_data)
     
-    top_ten_chocolate_by_country_percentage = top_ten_count_chocolate_ratings(chocolate_data)
+    # top_ten_chocolate_by_country_percentage = top_ten_count_chocolate_ratings_percent(chocolate_data)
+
+    cocoa_comparison = cocoa_percent_and_rating(chocolate_data)
