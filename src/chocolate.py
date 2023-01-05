@@ -81,8 +81,8 @@ def top_ten_count_chocolate_ratings_percent(choco_df):
 
 # Bin data into 4 groups based on cocoa percent and rating.
 def cocoa_percent_and_rating(choco_df):
-    chocolate_data['Remove Cocoa Percentage'] = chocolate_data['Cocoa Percent'].astype(str).str.replace('%', '')
-    chocolate_data['Cocoa Percentage as Float'] = chocolate_data['Remove Cocoa Percentage'].astype('float') / 100.0
+    choco_df['Remove Cocoa Percentage'] = choco_df['Cocoa Percent'].astype(str).str.replace('%', '')
+    choco_df['Cocoa Percentage as Float'] = choco_df['Remove Cocoa Percentage'].astype('float') / 100.0
     chocolate_data_high_both = choco_df[(choco_df['Cocoa Percentage as Float'] >= 0.70) & (choco_df['Rating'] >= 4.00)].shape[0]
     chocolate_data_high_cocoa = choco_df[(choco_df['Cocoa Percentage as Float'] >= 0.70) & (choco_df['Rating'] < 4.00)].shape[0]
     chocolate_data_mixed = choco_df[(choco_df['Cocoa Percentage as Float'] < 0.70) & (choco_df['Rating'] >= 4.00)].shape[0]
@@ -108,6 +108,38 @@ def cocoa_percent_and_rating(choco_df):
     plt.legend(handles=[chocolate_data_mixed_legend, chocolate_data_high_both_legend, chocolate_data_low_both_legend,chocolate_data_high_cocoa_legend])
     fig.tight_layout()
     plt.savefig("images/binned_cocoa_analysis.png")
+
+###
+
+# Find sweet listed in ingredients and memorable characteristics, then compare counts of individual catergories and overlap.
+def sweets_comparison(choco_df):
+    united_states_chocolate = chocolate_data[chocolate_data["Company Location"] == "U.S.A."]
+    us_sweet_ingredients = united_states_chocolate['Ingredients'].str.contains('S|S*').count()
+    us_memorable_characteristics_sweet = united_states_chocolate['Most Memorable Characteristics'].str.contains('sweet').count()
+    totally_sweet_dude = united_states_chocolate[(united_states_chocolate['Ingredients'].str.contains('S|S*')) & (united_states_chocolate['Most Memorable Characteristics'].str.contains('sweet'))].count()
+    sweets_overlap = totally_sweet_dude['Ingredients']
+    sweets_data = {"US Sweet Ingredients":us_sweet_ingredients, "US Memorable Characteristics: Sweet":us_memorable_characteristics_sweet, "Ingredients & Memorable Characteristics: Sweet": sweets_overlap}
+
+    # Horizontal bar plot of data.
+    fig, ax = plt.subplots(figsize = (14,6))
+        
+    c = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']
+    sweets_data_sorted = dict(sorted(sweets_data.items(), key=lambda item: item[1]))
+    sweets_categories = list(sweets_data_sorted.keys())
+    sweets_categories_count = list(sweets_data_sorted.values())
+
+    plt.bar(range(len(sweets_data_sorted)), sweets_categories_count, tick_label=sweets_categories, align = 'center', color = c)
+
+    ax.set_title("Sweets Analysis")
+    ax.set_ylabel("Sweets Counts")
+    ax.set_xlabel("Sweets by Category")
+    totally_sweet_dude_legend = mpatches.Patch(color= 'blue', label='Ingredients & Memorable Characteristics: Sweet: 155')
+    us_sweets_ingredient_legend = mpatches.Patch(color= 'orange', label='US Sweet Ingredients: 1150')
+    us_memorable_characteristics_legend = mpatches.Patch(color= 'green', label='US Memorable Characteristics: Sweet: 1168')
+    plt.legend(handles=[totally_sweet_dude_legend, us_sweets_ingredient_legend, us_memorable_characteristics_legend])
+    fig.tight_layout()
+    plt.savefig("images/sweets_analysis.png")
+
     
 # Respective functions listed below to test outputs to terminal and images directory.
 
@@ -120,3 +152,5 @@ if __name__ == "__main__":
     # top_ten_chocolate_by_country_percentage = top_ten_count_chocolate_ratings_percent(chocolate_data)
 
     # cocoa_and_rating_comparison = cocoa_percent_and_rating(chocolate_data)
+
+    # sweets_overlap = sweets_comparison(chocolate_data)

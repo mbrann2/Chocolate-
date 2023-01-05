@@ -13,7 +13,11 @@
     - [Rating Scale](#rating-scale)
     - [Review Guide](#review-guide)
     - [Variables](#variables)
-
+- [Overall Information](#overall)
+- [Data Analysis & Vizualization](#data-analysis--vizualization)
+    - [Top Ten Countries: Chocolate Ratings Count](#top-10-countries-chocolate-ratings-count)
+    - [Cocoa Percentage & Rating Comparisons](#cocoa-percentage--rating-comparisons)
+    - [Sweets Analysis](#sweets-analysis)
 <br />
 
 ***
@@ -94,6 +98,10 @@ The dataset provides a multitude of factors pertaining to chocolate ratings arou
 <br />
 
 ***
+## Data Analysis & Vizualization
+Listed below is the data analysis and vizualtion aspects for the chocolate bars dataset.
+***
+
 ### Top 10 Countries: Chocolate Ratings Count
 ***
 After comparing the top ten countries, it was revealed that by far the United States contains the most chocloate ratings. 
@@ -105,9 +113,17 @@ More specifically, the United States contains well more than half of the chocola
 ![](images/top_ten_pie_chart.png) <br />
 
 ***
-### Cocoa Percentage and Rating Comparisons
+### Cocoa Percentage & Rating Comparisons
 ***
 Comparisons were performed on all of the chocolate entries by binning the cocoa percentage and cocoa ratings into four distinct groups to better determine the respective linkages. It should be noted that greater thn 80% of the entries fell into the bin of a high cocoa percentage, which was chosen to be 70%, and a low rating, which is under a 4.0. If we recall from our rating scale above, a 4.0 is the lower threshold for the outstanding rating.
 ![](images/binned_cocoa_analysis.png) <br />
 
 To further analyze the cocoa percentage and cocoa rating, the linear, numerical pearson correlation and the nonlinear, numerical spearman correlation were utilized; the values yielded were -0.14456895490488086 and -0.10700879647699718, respectiviely which shows no correlation.  
+
+<br />
+
+***
+### Sweets Analysis
+***
+Seeing as the United States contained the majority of the choloate ratings, a sweets analysis was performed specific to this region. In particular, it seemed interesting to determine the number of United States chocolate ratings that contained a real or artifical sweetener in their product, listed in the ingredients, as well as the sweet flavor in fact being a memorable characteristic. From there, a comparison was executed to determine the overlap of the sweet trait in both the ingredients along with the memorable characteristics. Although 1,150 of the chocolate bars contained a sweet, or sugar, ingredient and 1,168 of the chocolate bar ratings contained the sweet profile as a memorable chracteristic, only 155 chocolate ratings contained both sweet as an ingredient and as a memorable characteristic. Further analysis could be performed to see if the cocoa percent played a factor, or had a correlation, to the sweetness being in the ingredients and a listed as a memorable characteristic.
+![](images/sweets_analysis.png) <br />
