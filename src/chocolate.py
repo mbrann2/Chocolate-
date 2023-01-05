@@ -79,6 +79,16 @@ def top_ten_count_chocolate_ratings_percent(choco_df):
      
 ###
 
+# Look at potential spearman and pearson correlations regarding cocoa percentage and rating.
+def cocoa_correlations(choco_df):
+    choco_df['Remove Cocoa Percentage'] = choco_df['Cocoa Percent'].astype(str).str.replace('%', '')
+    choco_df['Cocoa Percentage as Float'] = choco_df['Remove Cocoa Percentage'].astype('float') / 100.0
+    correlation_spearman = choco_df['Cocoa Percentage as Float'].corr(choco_df['Rating'], method ='spearman')
+    correlation_pearson = choco_df['Cocoa Percentage as Float'].corr(choco_df['Rating'], method ='pearson')
+    correlation_dict = {"Cocoa Percentage & Rating Correlation: Spearman":correlation_pearson, "Cocoa Percentage & Rating Correlation: Pearson":correlation_spearman}
+    return correlation_dict
+
+
 # Bin data into 4 groups based on cocoa percent and rating.
 def cocoa_percent_and_rating(choco_df):
     choco_df['Remove Cocoa Percentage'] = choco_df['Cocoa Percent'].astype(str).str.replace('%', '')
@@ -113,7 +123,7 @@ def cocoa_percent_and_rating(choco_df):
 
 # Find sweet listed in ingredients and memorable characteristics, then compare counts of individual catergories and overlap.
 def sweets_comparison(choco_df):
-    united_states_chocolate = chocolate_data[chocolate_data["Company Location"] == "U.S.A."]
+    united_states_chocolate = choco_df[choco_df["Company Location"] == "U.S.A."]
     us_sweet_ingredients = united_states_chocolate['Ingredients'].str.contains('S|S*').count()
     us_memorable_characteristics_sweet = united_states_chocolate['Most Memorable Characteristics'].str.contains('sweet').count()
     totally_sweet_dude = united_states_chocolate[(united_states_chocolate['Ingredients'].str.contains('S|S*')) & (united_states_chocolate['Most Memorable Characteristics'].str.contains('sweet'))].count()
@@ -151,6 +161,8 @@ if __name__ == "__main__":
     
     # top_ten_chocolate_by_country_percentage = top_ten_count_chocolate_ratings_percent(chocolate_data)
 
+    # cocoa_and_rating_correlation = cocoa_correlations(chocolate_data)
+    
     # cocoa_and_rating_comparison = cocoa_percent_and_rating(chocolate_data)
 
     # sweets_overlap = sweets_comparison(chocolate_data)
