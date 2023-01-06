@@ -18,6 +18,7 @@
     - [Top Ten Countries: Chocolate Ratings Count](#top-10-countries-chocolate-ratings-count)
     - [Cocoa Percentage & Rating Comparisons](#cocoa-percentage--rating-comparisons)
     - [Sweets Analysis](#sweets-analysis)
+    - [Statistics by Countries](#statistics-by-countries)
 <br />
 
 ***
@@ -127,3 +128,12 @@ To further analyze the cocoa percentage and cocoa rating, the linear, numerical 
 ***
 Seeing as the United States contained the majority of the choloate ratings, a sweets analysis was performed specific to this region. In particular, it seemed interesting to determine the number of United States chocolate ratings that contained a real or artifical sweetener in their product, listed in the ingredients, as well as the sweet flavor in fact being a memorable characteristic. From there, a comparison was executed to determine the overlap of the sweet trait in both the ingredients along with the memorable characteristics. Although 1,150 of the chocolate bars contained a sweet, or sugar, ingredient and 1,168 of the chocolate bar ratings contained the sweet profile as a memorable chracteristic, only 155 chocolate ratings contained both sweet as an ingredient and as a memorable characteristic. Further analysis could be performed to see if the cocoa percent played a factor, or had a correlation, to the sweetness being in the ingredients and a listed as a memorable characteristic.
 ![](images/sweets_analysis.png) <br />
+
+***
+### Statistics by Countries
+***
+A statistical breakdown, through box plots, was performed to display the quartiles, range, and outliers of the ccholocate bar ratings and cocoa percentages for the following countries: United States, France, and Canada. It is worth a mention that through this analysis, it was shown that both the United States and France had the same lower bound statistical outliers regarding rating values at 1.5 and 2.0, respectively. Further analysis could have been performed to combine all respective box plots on the same graph and incorporate the top ten countries by chocolate ratings as opposed to only the top three countries.
+<br />
+![](images/us_chocolate_stats.png)
+![](images/france_chocolate_stats.png)
+![](images/canada_chocolate_stats.png)
