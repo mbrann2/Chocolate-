@@ -111,10 +111,10 @@ def cocoa_percent_and_rating(choco_df):
     ax.set_title("Binned Chocolate Analysis")
     ax.set_ylabel("Chocolate Counts by Bin")
     ax.set_xlabel("Cocoa Percent & Rating Comparisons")
-    chocolate_data_mixed_legend = mpatches.Patch(color= 'blue', label='Chocolate Data Mixed: 16')
+    chocolate_data_mixed_legend = mpatches.Patch(color= 'blue', label='Chocolate Data Low Cocoa: 16')
     chocolate_data_high_both_legend = mpatches.Patch(color= 'orange', label='Chocolate Data High Both: 99')
     chocolate_data_low_both_legend = mpatches.Patch(color= 'green', label='Chocolate Data Low Both: 381')
-    chocolate_data_high_cocoa_legend = mpatches.Patch(color= 'red', label='Chocolate Data High Cocoa.: 2,092')
+    chocolate_data_high_cocoa_legend = mpatches.Patch(color= 'red', label='Chocolate Data High Cocoa: 2,092')
     plt.legend(handles=[chocolate_data_mixed_legend, chocolate_data_high_both_legend, chocolate_data_low_both_legend,chocolate_data_high_cocoa_legend])
     fig.tight_layout()
     plt.savefig("images/binned_cocoa_analysis.png")
@@ -126,9 +126,8 @@ def sweets_comparison(choco_df):
     united_states_chocolate = choco_df[choco_df["Company Location"] == "U.S.A."]
     us_sweet_ingredients = united_states_chocolate['Ingredients'].str.contains('S|S*').count()
     us_memorable_characteristics_sweet = united_states_chocolate['Most Memorable Characteristics'].str.contains('sweet').count()
-    totally_sweet_dude = united_states_chocolate[(united_states_chocolate['Ingredients'].str.contains('S|S*')) & (united_states_chocolate['Most Memorable Characteristics'].str.contains('sweet'))].count()
-    sweets_overlap = totally_sweet_dude['Ingredients']
-    sweets_data = {"US Sweet Ingredients":us_sweet_ingredients, "US Memorable Characteristics: Sweet":us_memorable_characteristics_sweet, "Ingredients & Memorable Characteristics: Sweet": sweets_overlap}
+    totally_sweet_dude = us_memorable_characteristics_sweet - us_sweet_ingredients
+    sweets_data = {"US Sweet Ingredients":us_sweet_ingredients, "US Memorable Characteristics: Sweet":us_memorable_characteristics_sweet, "Ingredients & Memorable Characteristics: Sweet": totally_sweet_dude}
 
     # Horizontal bar plot of data.
     fig, ax = plt.subplots(figsize = (14,6))
@@ -143,7 +142,7 @@ def sweets_comparison(choco_df):
     ax.set_title("Sweets Analysis")
     ax.set_ylabel("Sweets Counts")
     ax.set_xlabel("Sweets by Category")
-    totally_sweet_dude_legend = mpatches.Patch(color= 'blue', label='Ingredients & Memorable Characteristics: Sweet: 155')
+    totally_sweet_dude_legend = mpatches.Patch(color= 'blue', label='US Ingredients & Memorable Characteristics: Sweet: 18')
     us_sweets_ingredient_legend = mpatches.Patch(color= 'orange', label='US Sweet Ingredients: 1150')
     us_memorable_characteristics_legend = mpatches.Patch(color= 'green', label='US Memorable Characteristics: Sweet: 1168')
     plt.legend(handles=[totally_sweet_dude_legend, us_sweets_ingredient_legend, us_memorable_characteristics_legend])
