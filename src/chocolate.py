@@ -154,12 +154,14 @@ def sweets_comparison(choco_df):
 
 # Box plot of cocoa percent and rating for all United States company locations.
 def us_chocolate_stats(choco_df):
+    choco_df['Remove Cocoa Percentage'] = choco_df['Cocoa Percent'].astype(str).str.replace('%', '')
+    choco_df['Cocoa Percentage as Float'] = choco_df['Remove Cocoa Percentage'].astype('float') / 100.0
     united_states_chocolate = choco_df[choco_df["Company Location"] == "U.S.A."]
     us_ratings_and_cocoa_percent = united_states_chocolate.loc[:, ['Cocoa Percentage as Float', 'Rating']].assign(Location="U.S.")
 
     sns.boxplot(data=us_ratings_and_cocoa_percent)
     sns.set(rc={"figure.figsize":(6, 8)})
-    plt.title('US Ratings Statistics')
+    plt.title('US Statistics')
     plt.xlabel('US Chocolate Ratings')
     plt.ylabel('Ratings Values')
     plt.savefig("images/us_chocolate_stats.png")
@@ -168,12 +170,14 @@ def us_chocolate_stats(choco_df):
 
 # Box plot of cocoa percent and rating for all France company locations.
 def france_chocolate_stats(choco_df):
+    choco_df['Remove Cocoa Percentage'] = choco_df['Cocoa Percent'].astype(str).str.replace('%', '')
+    choco_df['Cocoa Percentage as Float'] = choco_df['Remove Cocoa Percentage'].astype('float') / 100.0
     france_chocolate = choco_df[choco_df["Company Location"] == "France"]
     france_ratings_and_cocoa_percent = france_chocolate.loc[:, ['Cocoa Percentage as Float', 'Rating']].assign(Location="France")
 
     sns.boxplot(data=france_ratings_and_cocoa_percent)
     sns.set(rc={"figure.figsize":(6, 8)})
-    plt.title('France Ratings Statistics')
+    plt.title('France Statistics')
     plt.xlabel('France Chocolate Ratings')
     plt.ylabel('France Values')
     plt.savefig("images/france_chocolate_stats.png")
@@ -182,12 +186,14 @@ def france_chocolate_stats(choco_df):
 
 # Box plot of cocoa percent and rating for all Canada company locations.
 def canada_chocolate_stats(choco_df):
+    choco_df['Remove Cocoa Percentage'] = choco_df['Cocoa Percent'].astype(str).str.replace('%', '')
+    choco_df['Cocoa Percentage as Float'] = choco_df['Remove Cocoa Percentage'].astype('float') / 100.0
     canada_chocolate = choco_df[choco_df["Company Location"] == "Canada"]
     canada_ratings_and_cocoa_percent = canada_chocolate.loc[:, ['Cocoa Percentage as Float', 'Rating']].assign(Location="Canada")
 
     sns.boxplot(data=canada_ratings_and_cocoa_percent)
     sns.set(rc={"figure.figsize":(6, 8)})
-    plt.title('Canada Ratings Statistics')
+    plt.title('Canada Statistics')
     plt.xlabel('Canada Chocolate Ratings')
     plt.ylabel('Canada Values')
     plt.savefig("images/canada_chocolate_stats.png")
@@ -211,8 +217,8 @@ if __name__ == "__main__":
 
     # sweets_overlap = sweets_comparison(chocolate_data)
 
-    us_chocolate_statistics = us_chocolate_stats(chocolate_data)
+    # us_chocolate_statistics = us_chocolate_stats(chocolate_data)
 
-#     france_chocolate_statistics = france_chocolate_stats(chocolate_data)
+    # france_chocolate_statistics = france_chocolate_stats(chocolate_data)
 
-#     canada_chocolate_statistics = canada_chocolate_stats(chocolate_data)
+    # canada_chocolate_statistics = canada_chocolate_stats(chocolate_data)
